@@ -1,36 +1,136 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# BraydenHQ - Staff Absence & Cover Management System
 
-## Getting Started
+**Date:** January 27, 2026
+**Status:** Development Snapshot (Phase 1 Concluded)
+**Version:** 1.0.0 (MVP)
 
-First, run the development server:
+## 📖 Overview
+
+**BraydenHQ** is a multi-tenant SaaS platform designed for Schools and Multi-Academy Trusts (MATs) to manage staff attendance, sickness, and cover requirements.
+
+The system features a **Hierarchical Architecture**:
+
+1.  **Trust Level (MAT):** Oversees multiple schools, monitors risk, and manages high-level interventions.
+2.  **School Level:** Principals and HR manage daily staff absences and operational health.
+3.  **Staff Level:** Individual teachers report absences, view wellbeing, and manage their return-to-work flow.
+
+## 🛠 Technical Stack
+
+### Frontend & Application Logic
+
+- **Framework:** [Next.js 14+](https://nextjs.org/) (App Router)
+- **Language:** TypeScript
+- **Styling:** Tailwind CSS
+- **Icons:** Lucide React
+- **State Management:** React Hooks (`useState`, `useEffect`)
+
+### Backend & Database
+
+- **BaaS (Backend as a Service):** [Supabase](https://supabase.com/)
+- **Database:** PostgreSQL
+- **Authentication:** Supabase Auth (Email/Password)
+- **Storage:** Supabase Storage (for document evidence)
+
+## ✨ Key Features
+
+### 🏢 For Multi-Academy Trusts (MATs)
+
+- **Trust Dashboard:** Aggregate view of all schools, total staff, and absence rates.
+- **Risk Watchlist:** Automated flagging of schools with critical absence levels (>10%).
+- **Intervention Management:** Schedule physical or virtual reviews with struggling schools.
+- **School Directory:** CRUD operations to add, edit, or remove schools from the trust.
+- **Trust Profile:** Manage trust HQ details and contact info.
+
+### 🏫 For Schools (Principals, HR, Cover Managers)
+
+- **Operational Dashboard:** Real-time view of "Who's off today" and "Cover Needed".
+- **Staff Directory:** Manage school employees and assign roles.
+- **Cover Management:** Assign cover supervisors to absent classes.
+- **Absence Reporting:** Log sickness or leave on behalf of staff (Proxy).
+- **Return to Work:** Process RTW interviews and close absence records.
+
+### 👩‍🏫 For Staff
+
+- **Self-Service Portal:** Report absence (Sickness/Leave) via the "Princewill Protocol".
+- **Wellbeing Pulse:** Weekly mood and stress check-ins.
+- **My History:** View past absences and remaining leave balance.
+
+## 🚀 How to Run (Developer Instructions)
+
+### 1. Prerequisites
+
+- Node.js (v18.0.0 or later)
+- npm or yarn
+- A Supabase project (for the database URL and Anon Key)
+
+### 2. Installation
+
+Clone the repository and install dependencies:
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+git clone [https://github.com/your-repo/braydenhq.git](https://github.com/your-repo/braydenhq.git)
+cd braydenhq
+npm install
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### 3. Environment Variables
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Create a .env.local file in the root directory and add your Supabase credentials:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```Bash
+NEXT_PUBLIC_SUPABASE_URL=your_supabase_project_url
+NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
+```
 
-## Learn More
+### 4. Database Setup
 
-To learn more about Next.js, take a look at the following resources:
+Ensure your Supabase PostgreSQL database has the following core tables:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- `mats`: Stores Trust entities.
+- `schools`: Stores School entities (linked to `mat_id`).
+- `staff`: Stores Users (linked to `school_id` OR `mat_id`).
+- `absence_records`: Stores sickness/leave data.
+- `wellbeing_entries`: Stores weekly pulse check data.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### 5. Start the Development Server
 
-## Deploy on Vercel
+```Bash
+npm run dev
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Open http://localhost:3000 with your browser to see the result.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 📂 Project Structure
+
+        /app
+        /cover       # Cover Manager Dashboard & Logic
+        /request     # Absence Request Logic (Princewill Protocol)
+        /schools     # MAT School Directory (CRUD)
+        /settings    # Traffic Controller for Profile/Settings
+        /tasks       # Traffic Controller for School/MAT Tasks
+        page.tsx     # Main Dashboard Traffic Controller
+        layout.tsx   # Global Layout (Sidebar + Shell)
+
+        /components
+        /dashboard   # MatDashboard.tsx, SchoolDashboard.tsx
+        /layout      # Sidebar.tsx, AppShell.tsx
+        /settings    # MatProfile.tsx, SchoolSettings.tsx
+        /tasks       # MatTasks.tsx, SchoolTasks.tsx
+
+        /lib
+        supabase.ts  # Supabase Client Initialization
+
+## 📝 Handover Notes
+
+**Role Logic:** The system uses a "Traffic Controller" pattern in page.tsx and the Sidebar to dynamically serve content based on the system_role ('MAT_Admin', 'Principal', 'HR', 'Staff').
+
+**Attendance Calculation:** Absence rates are currently calculated based on active absence records vs total staff count.
+
+**Authentication:** The system relies on Supabase Auth. Ensure RLS (Row Level Security) policies are enabled in Supabase for production to prevent cross-school data leaks.
+
+**Permissions:** Row Level Security (RLS) policies should be enabled in Supabase for production to prevent cross-school or cross-trust data access.
+
+#
+
+_This codebase represents the project state at the conclusion of the initial engagement.  
+The system is provided "as-is" for future development._
