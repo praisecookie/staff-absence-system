@@ -1,8 +1,8 @@
 # Staff Absence & Cover Management System
 
-**Date:** January 27, 2026
-**Status:** Development Snapshot (Phase 1 Concluded)
-**Version:** 1.0.0 (MVP)
+You need to understand TypeScript/JavaScript to reuse this system.  
+**Status:** To be updated by whoever wants to use it.  
+**Version:** 0.0.1
 
 ## 📖 Overview
 
@@ -19,7 +19,7 @@ The system features a **Hierarchical Architecture**:
 ### Frontend & Application Logic
 
 - **Framework:** [Next.js 14+](https://nextjs.org/) (App Router)
-- **Language:** TypeScript
+- **Language:** TypeScript, JavaScript
 - **Styling:** Tailwind CSS
 - **Icons:** Lucide React
 - **State Management:** React Hooks (`useState`, `useEffect`)
@@ -51,7 +51,7 @@ The system features a **Hierarchical Architecture**:
 
 ### 👩‍🏫 For Staff
 
-- **Self-Service Portal:** Report absence (Sickness/Leave) via the "Princewill Protocol".
+- **Self-Service Portal:** Report absence (Sickness/Leave).
 - **Wellbeing Pulse:** Weekly mood and stress check-ins.
 - **My History:** View past absences and remaining leave balance.
 
@@ -68,7 +68,7 @@ The system features a **Hierarchical Architecture**:
 Clone the repository and install dependencies:
 
 ```bash
-git clone [https://github.com/your-repo/braydenhq.git](https://github.com/your-repo/braydenhq.git)
+git clone [https://github.com/your-repo/staffabsence.git](https://github.com/your-repo/staffabsence.git)
 cd braydenhq
 npm install
 ```
@@ -120,7 +120,7 @@ Open http://localhost:3000 with your browser to see the result.
         /lib
         supabase.ts  # Supabase Client Initialization
 
-## 📝 Handover Notes
+## 📝 Notes
 
 **Role Logic:** The system uses a "Traffic Controller" pattern in page.tsx and the Sidebar to dynamically serve content based on the system_role ('MAT_Admin', 'Principal', 'HR', 'Staff').
 
@@ -132,5 +132,4 @@ Open http://localhost:3000 with your browser to see the result.
 
 #
 
-_This codebase represents the project state at the conclusion of the initial engagement.  
-The system is provided "as-is" for future development._
+_You can reuse this system structure if you are building something similar._
