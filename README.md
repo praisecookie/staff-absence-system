@@ -1,4 +1,4 @@
-# BraydenHQ - Staff Absence & Cover Management System
+# Staff Absence & Cover Management System
 
 **Date:** January 27, 2026
 **Status:** Development Snapshot (Phase 1 Concluded)
@@ -6,7 +6,7 @@
 
 ## 📖 Overview
 
-**BraydenHQ** is a multi-tenant SaaS platform designed for Schools and Multi-Academy Trusts (MATs) to manage staff attendance, sickness, and cover requirements.
+This is a multi-tenant SaaS platform designed for Schools and Multi-Academy Trusts (MATs) to manage staff attendance, sickness, and cover requirements.
 
 The system features a **Hierarchical Architecture**:
 
